@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSocket } from "../context/SocketProvider";
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/Lobby.module.css";
 
 const LobbyScreen = () => {
     const socket = useSocket();
+    const navigate = useNavigate(); 
     const [email, setEmail] = useState("");
     const [roomNumber, setRoomNumber] = useState("");
 
@@ -18,7 +20,7 @@ const LobbyScreen = () => {
 
     const handleJoinRoom = useCallback((data) => {
         const { email, roomNumber } = data;
-        console.log("Joined room with email:", email, "and room number:", roomNumber);
+        navigate(`/room/${roomNumber}`);
     }, []); 
 
     useEffect(() => {
